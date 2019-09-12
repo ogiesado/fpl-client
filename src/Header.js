@@ -8,7 +8,8 @@ import HistoryIcon from "@material-ui/icons/History";
 
 const useStyles = makeStyles({
   nav: {
-    width: "100%"
+    width: "100%",
+    backgroundColor: "rgb(248, 249, 250)"
   }
 });
 

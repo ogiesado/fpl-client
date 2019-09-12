@@ -18,7 +18,7 @@ export default function Fpl() {
   const latestWeekNumber = getPlayerLatestWeekNumber(players[0]);
 
   return (
-    <Box m={-1}>
+    <Box m={-1} style={{ backgroundColor: "rgb(248, 249, 250)" }}>
       <Header view={view} onViewChange={setView} />
       <Container fixed>
         {view === CURRENT_WEEK_VIEW && (

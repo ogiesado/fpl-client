@@ -97,9 +97,11 @@ export default function LatestWeek({
                 <div style={{ display: "flex" }}>
                   <div>
                     <Typography style={{ marginRight: 10 }} variant="subtitle1">
-                      {range(weekNumber - 3, weekNumber).map(i =>
-                        player.weeks[i].isWinner ? "W" : "L"
-                      )}
+                      {range(weekNumber - 4, weekNumber).map(i => {
+                        if (i in player.weeks) {
+                          return player.weeks[i].isWinner ? "W" : "L";
+                        }
+                      })}
                     </Typography>
                   </div>
                   <Typography style={{ marginLeft: "auto" }} variant="caption">
