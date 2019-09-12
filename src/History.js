@@ -5,19 +5,13 @@ import Typography from "@material-ui/core/Typography";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { range } from "./utils";
-
-const columns = [
-  { id: "name", label: "Name", minWidth: 200 },
-  { id: "code", label: "ISO\u00a0Code", minWidth: 100 }
-];
 
 export default function History({ players, latestWeekNumber = 0 }) {
   return (
     <Fragment>
-      <Typography component="h5" variant="h5">
+      <Typography component="h5" variant="h5" style={{ marginBottom: 10 }}>
         History
       </Typography>
 
@@ -31,19 +25,19 @@ export default function History({ players, latestWeekNumber = 0 }) {
           <Table stickyHeader>
             <TableHead>
               <TableRow>
-                <TableCell align="center" style={{ maxWidth: 50 }}>
+                <TableCell align="center" style={{ maxWidth: 30 }}>
                   Week
                 </TableCell>
                 {players.map(player => (
                   <TableCell
                     key={player.id}
                     align="center"
-                    style={{ minWidth: 100 }}
+                    style={{ minWidth: 30 }}
                   >
-                    {player.name}
+                    {player.preferredName}
                   </TableCell>
                 ))}
-                <TableCell align="center" style={{ minWidth: 100 }}>
+                <TableCell align="center" style={{ minWidth: 30 }}>
                   Winner
                 </TableCell>
               </TableRow>
@@ -58,7 +52,10 @@ export default function History({ players, latestWeekNumber = 0 }) {
                     </TableCell>
                   ))}
                   <TableCell align="center">
-                    {players.find(player => player.weeks[i].isWinner).name}
+                    {
+                      players.find(player => player.weeks[i].isWinner)
+                        .preferredName
+                    }
                   </TableCell>
                 </TableRow>
               ))}

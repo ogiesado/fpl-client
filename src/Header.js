@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { BottomNavigationAction, BottomNavigation } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import GameWeekIcon from "@material-ui/icons/PlayCircleOutline";
-import OverallIcon from "@material-ui/icons/ShowChart";
+import PaymentsIcon from "@material-ui/icons/EuroSymbol";
 import HistoryIcon from "@material-ui/icons/History";
 
 const useStyles = makeStyles({
@@ -26,6 +26,7 @@ export default function Header({ view, onViewChange }) {
         </Toolbar>
       </AppBar>
       <BottomNavigation
+        style={{ marginTop: 20, marginBottom: 20 }}
         value={view}
         onChange={(event, newView) => {
           onViewChange(newView);
@@ -34,8 +35,8 @@ export default function Header({ view, onViewChange }) {
         className={classes.nav}
       >
         <BottomNavigationAction label="Latest Week" icon={<GameWeekIcon />} />
-        <BottomNavigationAction label="Summary" icon={<OverallIcon />} />
         <BottomNavigationAction label="History" icon={<HistoryIcon />} />
+        <BottomNavigationAction label="Payments" icon={<PaymentsIcon />} />
       </BottomNavigation>
     </Fragment>
   );

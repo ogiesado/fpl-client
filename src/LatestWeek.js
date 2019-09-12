@@ -4,7 +4,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
-import Chip from "@material-ui/core/Chip";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { range, getPlayerWeek, sortPlayersByWeek } from "./utils";
 
@@ -101,6 +100,8 @@ export default function LatestWeek({
                         if (i in player.weeks) {
                           return player.weeks[i].isWinner ? "W" : "L";
                         }
+
+                        return "";
                       })}
                     </Typography>
                   </div>

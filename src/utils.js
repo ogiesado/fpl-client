@@ -1,3 +1,5 @@
+import { PRICE_PER_WIN_IN_EUROS } from "./constants";
+
 export function transformPlayerData(data) {
   if (data === null) return null;
 
@@ -6,6 +8,10 @@ export function transformPlayerData(data) {
     name: `${data.player_first_name} ${data.player_last_name}`,
     initials: `${data.player_first_name[0].toUpperCase()}${data.player_last_name[0].toUpperCase()}`,
     teamName: data.name,
+    preferredName:
+      data.player_first_name.toLowerCase() === "ogie"
+        ? data.player_last_name
+        : data.player_first_name,
     points: data.summary_overall_points,
     startedWeekNumber: data.started_event,
     latestWeekNumber: data.current_event
@@ -107,4 +113,41 @@ export function setWinners(players = [], latestWeek = 0) {
   }
 
   return [...players];
+}
+
+export function getPlayerTotalWins(player) {
+  return Object.keys(player.weeks).reduce((totalWins, weekNumber) => {
+    const week = player.weeks[weekNumber];
+
+    if (week.isWinner) return totalWins + 1;
+    return totalWins;
+  }, 0);
+}
+
+export function getPlayerTotalLosses(player) {
+  return Object.keys(player.weeks).reduce((totalWins, weekNumber) => {
+    const week = player.weeks[weekNumber];
+
+    if (!week.isWinner) return totalWins + 1;
+    return totalWins;
+  }, 0);
+}
+
+export function getPlayerTotalCashWinnings(player) {
+  return getPlayerTotalWins(player) * PRICE_PER_WIN_IN_EUROS;
+}
+
+export function getPlayerTotalCashLosses(player) {
+  return -(getPlayerTotalLosses(player) * PRICE_PER_WIN_IN_EUROS);
+}
+
+export function getPlayerCashBalance(player) {
+  return getPlayerTotalCashWinnings(player) + getPlayerTotalCashLosses(player);
+}
+
+export function getPlayerCashBalanceColor(player) {
+  const balance = getPlayerCashBalance(player);
+  if (balance < 0) return "red";
+  if (balance > 0) return "green";
+  return undefined;
 }
