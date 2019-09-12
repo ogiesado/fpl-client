@@ -8,13 +8,12 @@ import History from "./History";
 import { CURRENT_WEEK_VIEW, PAYMENTS_VIEW, HISTORY_VIEW } from "./constants";
 import data from "./data";
 import usePlayers from "./usePlayers";
-import usePlayer from "./usePlayer";
 import { getPlayerLatestWeekNumber } from "./utils";
+import DebugPanel from "./DebugPanel";
 
 export default function Fpl() {
   const [view, setView] = React.useState(CURRENT_WEEK_VIEW);
   const players = usePlayers(data.playerIds);
-  const player = usePlayer(data.playerIds[0]);
   const numberOfPlayers = data.playerIds.length;
   const latestWeekNumber = getPlayerLatestWeekNumber(players[0]);
 
@@ -36,8 +35,7 @@ export default function Fpl() {
           {view === HISTORY_VIEW && (
             <History players={players} latestWeekNumber={latestWeekNumber} />
           )}
-          <pre>{JSON.stringify(players, null, 2)}</pre>
-          <pre>{JSON.stringify(player, null, 2)}</pre>
+          <DebugPanel players={players} />
         </Container>
       </Box>
     </IntlProvider>
