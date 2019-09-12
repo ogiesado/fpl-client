@@ -30,8 +30,8 @@ export default function Fpl() {
         )}
         {view === SUMMARY_VIEW && <Summary />}
         {view === HISTORY_VIEW && <History />}
-        <pre>{JSON.stringify(player, null, 2)}</pre>
         <pre>{JSON.stringify(players, null, 2)}</pre>
+        <pre>{JSON.stringify(player, null, 2)}</pre>
       </Container>
     </Box>
   );

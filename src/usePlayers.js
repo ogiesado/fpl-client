@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "./constants";
-import { range, transformPlayerData, transformWeekData } from "./utils";
+import {
+  range,
+  transformPlayerData,
+  transformWeekData,
+  setWinners
+} from "./utils";
 
 export default function usePlayers(playerIds = []) {
   const [players, setPlayers] = useState([]);
@@ -53,7 +58,10 @@ export default function usePlayers(playerIds = []) {
           })
         );
 
-        if (!cancelled) setPlayers(Object.values(playersData));
+        const players = Object.values(playersData);
+
+        if (!cancelled)
+          setPlayers(setWinners(players, players[0].latestWeekNumber));
       });
     }
 

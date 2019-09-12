@@ -22,7 +22,8 @@ export function transformWeekData(data) {
     cummulativePoints: data.entry_history.total_points,
     benchPoints: data.entry_history.points_on_bench,
     numberOfTransfers: data.entry_history.event_transfers,
-    costOfTransfers: data.entry_history.event_transfers_cost
+    costOfTransfers: data.entry_history.event_transfers_cost,
+    isWinner: false
   };
 }
 
@@ -90,4 +91,20 @@ export function sortPlayersByWeek(players = [], weekNumber) {
     }
     return 0;
   });
+}
+
+export function setWinners(players = [], latestWeek = 0) {
+  if (players.length === 0 || latestWeek === 0) return [...players];
+  for (let currentWeek = 1; currentWeek <= latestWeek; currentWeek++) {
+    const { winner } = players.reduce((topScorer, player) => {
+      const points = getPlayerWeek(player, currentWeek).points;
+      if (topScorer === null) return { winner: player, points };
+
+      return topScorer.points > points ? topScorer : { winner: player, points };
+    }, null);
+
+    winner.weeks[currentWeek].isWinner = true;
+  }
+
+  return [...players];
 }
