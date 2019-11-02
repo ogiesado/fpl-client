@@ -21,7 +21,7 @@ export default function DebugPanel({ players = [] }) {
             <Typography>{`${player.preferredName} (${player.id})`}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>
+            <Typography component="span">
               <pre>{JSON.stringify(player, null, 2)}</pre>
             </Typography>
           </ExpansionPanelDetails>

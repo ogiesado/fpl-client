@@ -63,9 +63,7 @@ export function range(start = 0, end = 0) {
 
 export function getPlayerLatestWeekNumber(player) {
   if (player && Object.keys(player.weeks).length > 0) {
-    return Object.keys(player.weeks)
-      .sort()
-      .pop();
+    return Object.keys(player.weeks).pop();
   }
   return 0;
 }
